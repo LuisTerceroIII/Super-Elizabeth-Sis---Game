@@ -18,7 +18,6 @@ public class Juego extends InterfaceJuego
 	private LinkedList<Obstaculo> obstaculos =  new LinkedList<>();
 	private LinkedList<Enemigo> enemigos = new LinkedList<>();
 	private Poder poder;
-	Image nice;
 	private int nivel = 0;
 
 	// Variables y métodos propios de cada grupo
