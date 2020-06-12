@@ -9,8 +9,7 @@ public class Princesa {
 
     private double x;
     private double y;
-    Image image;
-    private boolean atancando = false;
+    private Image image;
     private Poder poder;
 
 
@@ -31,13 +30,18 @@ public class Princesa {
         } else if (entorno.estaPresionada(entorno.TECLA_ESPACIO)) {
             entorno.dibujarImagen(image, x, y, 0, 0.2);
             this.poder = new Poder(this.x + 50, this.y);
-        } else {
+        }/*else if (entorno.estaPresionada(entorno.TECLA_DERECHA) && entorno.estaPresionada(entorno.TECLA_ESPACIO) ) {
+            entorno.dibujarImagen(image, x + 100, y, 0, 0.2);
+            this.poder = new Poder(this.x + 150, this.y);
+        }*/
+        else {
             entorno.dibujarImagen(image, x, y, 0, 0.2);
         }
     }
     public Poder atacar() {
         return poder;
     }
+
 
     public double getX() {
         return x;

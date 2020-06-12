@@ -1,15 +1,35 @@
 <component name="ProjectDictionaryState">
   <dictionary name="luis-tercero">
     <words>
+      <w>angulo</w>
+      <w>atacar</w>
       <w>avanzar</w>
+      <w>controla</w>
       <w>dibujar</w>
       <w>dibujarse</w>
       <w>disparar</w>
+      <w>distancia</w>
+      <w>enemigo</w>
+      <w>enemigos</w>
+      <w>entorno</w>
       <w>escala</w>
       <w>fondo</w>
+      <w>fondos</w>
       <w>fuego</w>
       <w>grupo</w>
+      <w>juego</w>
+      <w>nivel</w>
+      <w>nueva</w>
+      <w>objeto</w>
+      <w>obstaculo</w>
+      <w>obstaculos</w>
+      <w>otros</w>
+      <w>posicion</w>
       <w>princesa</w>
+      <w>soldado</w>
+      <w>tiempo</w>
+      <w>tuberia</w>
+      <w>ultima</w>
       <w>velocidad</w>
     </words>
   </dictionary>

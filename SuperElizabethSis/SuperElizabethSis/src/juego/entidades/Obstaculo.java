@@ -1,20 +1,26 @@
 package juego.entidades;
 
 import entorno.Entorno;
-import entorno.Herramientas;
 
 import java.awt.*;
 
 public class Obstaculo {
     private double x;
     private double y;
+    private double angulo;
+    private double escala;
     private Image image;
-    private double moveSpeed = 0.5;
+    private double velocidad = 1.5;
+    private final int nuevaPosicion;
 
-    public Obstaculo(double x) { //Solo recibe como parametro x, para evitar que lo desacomoden del piso.
+    public Obstaculo(double x,double y,double angulo, double escala,double velocidad, Image image) {
         this.x = x;
-        this.y = 500;
-        this.image = Herramientas.cargarImagen("green-pipe.png");
+        this.y = y;
+        this.angulo = angulo;
+        this.escala = escala;
+        this.velocidad = velocidad;
+        this.image = image;
+        nuevaPosicion = (int) x;
     }
 
     public double getX() {
@@ -42,10 +48,13 @@ public class Obstaculo {
     }
 
     public void dibujarse(Entorno entorno) {
-        entorno.dibujarImagen(this.image,x,y,0,0.2);
+        entorno.dibujarImagen(this.image,x,y,angulo,escala);
     }
 
     public void moverIzq() {
-        this.x = this.x - moveSpeed;
+        this.x = this.x - velocidad;
+        if(this.x < -40 ){
+           this.x = 1000 ;
+        }
     }
 }

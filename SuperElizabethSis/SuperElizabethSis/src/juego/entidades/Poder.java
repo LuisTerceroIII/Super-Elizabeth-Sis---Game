@@ -8,7 +8,7 @@ import java.awt.*;
 public class Poder {
     private double x;
     private double y;
-    private final double SPEED = 0.9;
+    private double velocidad = 5.9;
     private Image image;
 
     public Poder(double x, double y) {
@@ -23,8 +23,16 @@ public class Poder {
     }
 
     public void avanzar(){
-        this.x = this.x + SPEED;
+        this.x = this.x + velocidad;
     }
+
+    public boolean colision(Rectangle objeto) {
+        return objeto.intersects(getBordes());
+    }
+    public Rectangle getBordes() {
+        return new Rectangle((int)x,(int)y,10,20);
+    }
+
 
     public double getX() {
         return x;
