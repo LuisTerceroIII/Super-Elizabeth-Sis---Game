@@ -4,7 +4,13 @@
       <w>angulo</w>
       <w>atacar</w>
       <w>avanzar</w>
+      <w>bordes</w>
+      <w>cada</w>
+      <w>cantidad</w>
+      <w>colision</w>
+      <w>colisiones</w>
       <w>controla</w>
+      <w>controlador</w>
       <w>dibujar</w>
       <w>dibujarse</w>
       <w>disparar</w>
@@ -13,24 +19,39 @@
       <w>enemigos</w>
       <w>entorno</w>
       <w>escala</w>
+      <w>falta</w>
       <w>fondo</w>
       <w>fondos</w>
       <w>fuego</w>
+      <w>generar</w>
+      <w>golpe</w>
+      <w>golpeada</w>
       <w>grupo</w>
+      <w>haga</w>
+      <w>inicia</w>
+      <w>inicializa</w>
+      <w>inicializar</w>
+      <w>intersectado</w>
       <w>juego</w>
+      <w>métodos</w>
       <w>nivel</w>
       <w>nueva</w>
       <w>objeto</w>
       <w>obstaculo</w>
       <w>obstaculos</w>
       <w>otros</w>
+      <w>perder</w>
       <w>posicion</w>
       <w>princesa</w>
+      <w>propios</w>
+      <w>puntaje</w>
       <w>soldado</w>
+      <w>soldados</w>
       <w>tiempo</w>
       <w>tuberia</w>
       <w>ultima</w>
       <w>velocidad</w>
+      <w>vidas</w>
     </words>
   </dictionary>
 </component>

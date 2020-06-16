@@ -9,7 +9,7 @@ public class Poder {
     private double x;
     private double y;
     private double velocidad = 5.9;
-    private Image image;
+    private final Image image;
 
     public Poder(double x, double y) {
         this.x = x;

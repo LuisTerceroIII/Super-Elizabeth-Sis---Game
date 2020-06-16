@@ -12,7 +12,7 @@ public class Enemigo {
     private double escala;
     private final double velocidad;
     private Image image;
-    private final int nuevaPosicion;
+
 
     public Enemigo(double x, double y,double angulo, double escala, double velocidad, Image image) {
         this.x = x;
@@ -21,7 +21,7 @@ public class Enemigo {
         this.escala = escala;
         this.velocidad = velocidad;
         this.image = image;
-        nuevaPosicion = (int) x;
+
     }
 
     public void dibujarse(Entorno entorno) {
@@ -31,13 +31,12 @@ public class Enemigo {
     public void moverIzq() {
         this.x = this.x - velocidad;
         if(this.x < -100 ){
-            this.x = 1500;
-
+            this.x = Math.floor(Math.random()*(1500-1300+1)+1500);
         }
     }
 
-    public Rectangle getBorder() {
-        return new Rectangle((int)x,(int)y,50,300);
+    public Rectangle getBordes() {
+        return new Rectangle((int)x,(int)y,110,90);
     }
 
     public double getX() {

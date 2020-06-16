@@ -3,6 +3,7 @@ package juego.entidades;
 import entorno.Entorno;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class Obstaculo {
     private double x;
@@ -11,7 +12,8 @@ public class Obstaculo {
     private double escala;
     private Image image;
     private double velocidad = 1.5;
-    private final int nuevaPosicion;
+
+
 
     public Obstaculo(double x,double y,double angulo, double escala,double velocidad, Image image) {
         this.x = x;
@@ -20,8 +22,10 @@ public class Obstaculo {
         this.escala = escala;
         this.velocidad = velocidad;
         this.image = image;
-        nuevaPosicion = (int) x;
+
     }
+
+    public Obstaculo() {}
 
     public double getX() {
         return x;
@@ -49,6 +53,7 @@ public class Obstaculo {
 
     public void dibujarse(Entorno entorno) {
         entorno.dibujarImagen(this.image,x,y,angulo,escala);
+
     }
 
     public void moverIzq() {
@@ -57,4 +62,20 @@ public class Obstaculo {
            this.x = 1000 ;
         }
     }
+    public Rectangle getBordes() {
+        return new Rectangle((int)x,(int)y,60,80);
+    }
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Obstaculo obstaculo = (Obstaculo) object;
+        return Double.compare(obstaculo.x, x) == 0 &&
+                Double.compare(obstaculo.y, y) == 0 &&
+                Double.compare(obstaculo.angulo, angulo) == 0 &&
+                Double.compare(obstaculo.escala, escala) == 0 &&
+                Double.compare(obstaculo.velocidad, velocidad) == 0 &&
+                Objects.equals(image, obstaculo.image);
+    }
+
 }
