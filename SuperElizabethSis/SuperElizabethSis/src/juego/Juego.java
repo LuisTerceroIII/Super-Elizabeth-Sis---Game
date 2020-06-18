@@ -28,7 +28,7 @@ public class Juego extends InterfaceJuego {
         // Inicializar lo que haga falta para el juego
 
         this.nivel = 0;
-        this.puntos = 0;
+        puntos = 0;
 
         Fondo fondoMario = new Fondo(Herramientas.cargarImagen("./background.png"), 600, 300, 0.3);
 
@@ -80,9 +80,9 @@ public class Juego extends InterfaceJuego {
 
     public static void controladorPuntaje(Entorno entorno, Princesa princesa, LinkedList<Enemigo> enemigos) {
 
-        entorno.dibujarImagen(Herramientas.cargarImagen("score.gif"), 50, 50, 0, 0.3);
         entorno.cambiarFont("Arial", 30, Color.BLACK);
-        entorno.escribirTexto(puntos + "", 100, 60);
+        entorno.dibujarImagen(Herramientas.cargarImagen("ICON_puntos.png"),215,65,0);
+        entorno.escribirTexto(puntos + "", 170, 108);
 
         Poder poder = princesa.atacar();
 
@@ -90,18 +90,16 @@ public class Juego extends InterfaceJuego {
             poder.dibujar(entorno);
             poder.avanzar();
         }
-        if (enemigos.size() != 0 && poder != null) {
 
+        if (enemigos.size() != 0 && poder != null) {
             for (int i = 0; i < enemigos.size() ; i++) {
                 if (poder.colision(enemigos.get(i).getBordes())) {
                     poder.setY(-10000000);
                     enemigos.remove(i);
                     puntos += 5;
-
                 }
             }
         }
-
     }
 
     public static void colisiones(Entorno entorno, Princesa princesa, LinkedList<Obstaculo> obstaculos, LinkedList<Enemigo> enemigos) {
@@ -118,9 +116,7 @@ public class Juego extends InterfaceJuego {
                 princesa.setGolpeada(true);
                 princesa.setTiempoDelGolpe(System.currentTimeMillis());
             }
-
         }
-
     }
 
     public static void generarSoldados(LinkedList<Enemigo> enemigos) {
@@ -134,7 +130,6 @@ public class Juego extends InterfaceJuego {
             }
         }
     }
-
 
     public static void princesa(Entorno entorno, Princesa princesa) {
         princesa.dibujarse(entorno);

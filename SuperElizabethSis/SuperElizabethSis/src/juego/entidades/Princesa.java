@@ -2,7 +2,6 @@ package juego.entidades;
 
 import entorno.Entorno;
 import entorno.Herramientas;
-
 import java.awt.*;
 
 public class Princesa {
@@ -57,11 +56,12 @@ public class Princesa {
 
     public void controladorVidas(Entorno entorno) {
 
-        entorno.dibujarImagen(vida, 200, 50, 0, 0.3);
-        entorno.cambiarFont("Arial", 30, Color.BLACK);
-        entorno.escribirTexto("X", 250, 60);
-        entorno.cambiarFont("Arial", 50, Color.BLACK);
-        entorno.escribirTexto(this.getVidas() + "", 275, 65);
+        entorno.dibujarImagen(vida, 100, 100, 0, 0.7);
+        int x  = 170;
+        for (int i = 1; i <= vidas ; i++) {
+            entorno.dibujarImagen(Herramientas.cargarImagen("ICONO_vidascorazones.png"), x, 130, 0, 0.7);
+            x = x + 30;
+        }
 
         if(System.currentTimeMillis() - this.getTiempoDelGolpe()   > 2500 && this.isGolpeada()){
             this.setGolpeada(false);
@@ -116,6 +116,7 @@ public class Princesa {
         this.golpeada = golpeada;
         if(golpeada) {
             this.vidas -= 1;
+
         }
     }
 
