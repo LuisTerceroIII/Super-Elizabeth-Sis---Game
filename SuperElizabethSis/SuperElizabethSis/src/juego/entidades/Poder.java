@@ -19,16 +19,18 @@ public class Poder {
 
     public void dibujar(Entorno entorno) {
         entorno.dibujarImagen(image,x,y,0,0.1);
-
     }
 
     public void avanzar(){
         this.x = this.x + velocidad;
     }
 
+    /* Se verifica si la instancia colisiona con otra */
     public boolean colision(Rectangle objeto) {
         return objeto.intersects(getBordes());
     }
+
+    /* Se obtiene el rectángulo de colisión de la instancia */
     public Rectangle getBordes() {
         return new Rectangle((int)x,(int)y,10,20);
     }

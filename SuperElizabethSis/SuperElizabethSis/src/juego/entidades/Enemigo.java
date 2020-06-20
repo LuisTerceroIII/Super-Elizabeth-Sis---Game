@@ -28,13 +28,14 @@ public class Enemigo {
         entorno.dibujarImagen(image,x,y,angulo,escala);
     }
 
+    /* Movimiento hacia izquierda */
     public void moverIzq() {
         this.x = this.x - velocidad;
         if(this.x < -100 ){
             this.x = Math.floor(Math.random()*(1500-1300+1)+1500);
         }
     }
-
+    /* Se obtiene el rectángulo de colisión de la instancia */
     public Rectangle getBordes() {
         return new Rectangle((int)x,(int)y,110,90);
     }

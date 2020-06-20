@@ -4,10 +4,13 @@
       <w>angulo</w>
       <w>atacar</w>
       <w>avanzar</w>
+      <w>barra</w>
       <w>bordes</w>
       <w>cada</w>
+      <w>caer</w>
       <w>cantidad</w>
       <w>colision</w>
+      <w>colisiona</w>
       <w>colisiones</w>
       <w>controla</w>
       <w>controlador</w>
@@ -41,13 +44,18 @@
       <w>obstaculos</w>
       <w>otros</w>
       <w>perder</w>
+      <w>poder</w>
       <w>posicion</w>
       <w>princesa</w>
       <w>propios</w>
       <w>puntaje</w>
       <w>puntos</w>
+      <w>saltando</w>
+      <w>saltar</w>
+      <w>salto</w>
       <w>soldado</w>
       <w>soldados</w>
+      <w>suelo</w>
       <w>tiempo</w>
       <w>tuberia</w>
       <w>ultima</w>
