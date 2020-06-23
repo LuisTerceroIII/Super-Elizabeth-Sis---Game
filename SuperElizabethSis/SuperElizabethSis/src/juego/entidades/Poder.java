@@ -11,17 +11,23 @@ public class Poder {
     private double velocidad = 5.9;
     private final Image image;
 
+
     public Poder(double x, double y) {
         this.x = x;
         this.y = y;
-        this.image = Herramientas.cargarImagen("fireball.gif");
+        this.image = Herramientas.cargarImagen("juego/recursos/fireball.gif");
     }
+
+
 
     public void dibujar(Entorno entorno) {
         entorno.dibujarImagen(image,x,y,0,0.1);
     }
 
     public void avanzar(){
+        if(this.x > 850) {
+            this.y = -10000000;
+        }
         this.x = this.x + velocidad;
     }
 

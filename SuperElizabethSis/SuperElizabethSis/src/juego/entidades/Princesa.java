@@ -21,37 +21,38 @@ public class Princesa {
     public Princesa() {
         this.x = 200;
         this.y = SUELO;
-        this.image = Herramientas.cargarImagen("./Peach.gif");
+        this.image = Herramientas.cargarImagen("juego/recursos/Peach.gif");
         this.vidas = 3;
         this.golpeada = false;
         this.saltando = false;
         this.bordes = new Rectangle((int) x, (int) y, 50, 60);
+        this.poder = new Poder(-10, -20);
     }
 
     /*Se verifica todo lo que deba actualizarse en tick() : movimientos, ataque y vidas */
     public void dibujarse(Entorno entorno) {
-        if (entorno.estaPresionada(entorno.TECLA_ARRIBA)) {
-            setSaltando(true);
-            entorno.dibujarImagen(image, x, y, 0, 0.2);
-            bordes.setBounds((int) x, (int) y, 50, 60);
-        } else {
-            entorno.dibujarImagen(image, x, y, 0, 0.2);
-            bordes.setBounds((int) x, (int) y, 50, 60);
-        }
+        entorno.dibujarImagen(image, x, y, 0, 0.2);
+        bordes.setBounds((int) x, (int) y, 50, 60);
         if (this.y == SUELO) {
-            if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
+            if (entorno.estaPresionada(entorno.TECLA_ARRIBA) && this.y == SUELO) {
+                setSaltando(true);
+                
+
+            } else if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
                 if (this.getX() < 300) {
                     this.setX(this.x + 2.5);
                 }
                 entorno.dibujarImagen(image, x, y, 0, 0.2);
                 bordes.setBounds((int) this.getX(), (int) y, 50, 60);
+
             } else if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
                 if (this.getX() > 50) {
                     this.setX(this.x - 2.5);
                 }
                 entorno.dibujarImagen(image, x, y, 0, 0.2);
                 bordes.setBounds((int) x, (int) y, 50, 60);
-            } else if (entorno.estaPresionada(entorno.TECLA_ESPACIO)) {
+
+            } else if (entorno.estaPresionada(entorno.TECLA_ESPACIO) && (this.poder.getX() > 850 || this.poder.getY() == -10000000)) {
                 entorno.dibujarImagen(image, x, y, 0, 0.2);
                 this.poder = new Poder(this.x + 50, this.y);
             }
@@ -82,21 +83,23 @@ public class Princesa {
     }
     /* Metodo que se ejecuta cuando saltando = true*/
     public void saltar() {
+
         if (this.y > 200) {
             this.y = this.y - 5.5;
             if (this.x < 300) {
                 this.x = this.x + 1.5;
             }
-
         }
         if (this.y <= 200) {
             this.setSaltando(false);
         }
+
     }
+
     /* Metodo que se ejecuta cuando saltando = false*/
     public void caer() {
         if (this.y < SUELO) {
-            this.y = this.y + 3.5;
+            this.y = this.y + 5.5;
             if (this.x < 300) {
                 this.x = this.x + 1.5;
             }
