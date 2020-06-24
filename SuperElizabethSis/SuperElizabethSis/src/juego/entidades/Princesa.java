@@ -3,6 +3,7 @@ package juego.entidades;
 import entorno.Entorno;
 import entorno.Herramientas;
 
+
 import java.awt.*;
 
 public class Princesa {
@@ -17,6 +18,8 @@ public class Princesa {
     private boolean saltando;
     private final int SUELO = 490;
     private Rectangle bordes; // Rectangulo para verificar colisiones
+
+
 
     public Princesa() {
         this.x = 200;
@@ -34,9 +37,9 @@ public class Princesa {
         entorno.dibujarImagen(image, x, y, 0, 0.2);
         bordes.setBounds((int) x, (int) y, 50, 60);
         if (this.y == SUELO) {
-            if (entorno.estaPresionada(entorno.TECLA_ARRIBA) && this.y == SUELO) {
+            if (entorno.sePresiono(entorno.TECLA_ARRIBA) && this.y == SUELO) {
                 setSaltando(true);
-                
+                Herramientas.play("juego/recursos/jump.wav");
 
             } else if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
                 if (this.getX() < 300) {
@@ -44,7 +47,6 @@ public class Princesa {
                 }
                 entorno.dibujarImagen(image, x, y, 0, 0.2);
                 bordes.setBounds((int) this.getX(), (int) y, 50, 60);
-
             } else if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
                 if (this.getX() > 50) {
                     this.setX(this.x - 2.5);
@@ -52,9 +54,11 @@ public class Princesa {
                 entorno.dibujarImagen(image, x, y, 0, 0.2);
                 bordes.setBounds((int) x, (int) y, 50, 60);
 
-            } else if (entorno.estaPresionada(entorno.TECLA_ESPACIO) && (this.poder.getX() > 850 || this.poder.getY() == -10000000)) {
+            } else if (entorno.sePresiono(entorno.TECLA_ESPACIO) && (this.poder.getX() > 850 || this.poder.getY() == -10000000)) {
                 entorno.dibujarImagen(image, x, y, 0, 0.2);
                 this.poder = new Poder(this.x + 50, this.y);
+                Herramientas.play("juego/recursos/fireball.wav");
+
             }
         }
         this.controladorVidas();
@@ -83,7 +87,6 @@ public class Princesa {
     }
     /* Metodo que se ejecuta cuando saltando = true*/
     public void saltar() {
-
         if (this.y > 200) {
             this.y = this.y - 5.5;
             if (this.x < 300) {
@@ -125,6 +128,7 @@ public class Princesa {
         this.golpeada = golpeada;
         if (golpeada) {
             this.vidas -= 1;
+            Herramientas.play("juego/recursos/stomp_koopa_kid.wav");
         }
     }
 

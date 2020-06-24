@@ -5,6 +5,7 @@ import entorno.Herramientas;
 import entorno.InterfaceJuego;
 import juego.entidades.*;
 
+import javax.sound.sampled.Clip;
 import java.util.LinkedList;
 
 public class Juego extends InterfaceJuego {
@@ -15,6 +16,8 @@ public class Juego extends InterfaceJuego {
     protected LinkedList<Obstaculo> obstaculos = new LinkedList<>();
     protected LinkedList<Enemigo> enemigos = new LinkedList<>();
     protected int nivel;
+    protected boolean gameOver;
+    Clip gameOverSound;
 
     Juego() {
         // Inicializa el objeto entorno
@@ -25,9 +28,8 @@ public class Juego extends InterfaceJuego {
 
         this.nivel = 0;
 
-
         Fondo fondoMario = new Fondo(Herramientas.cargarImagen("juego/recursos/background.png"), 600, 300, 0.3);
-
+        Fondo gameOver = new Fondo(Herramientas.cargarImagen("juego/recursos/PAGE_gameover.jpg"), 400, 0, 0);
 
         princesa = new Princesa();
 
@@ -40,7 +42,7 @@ public class Juego extends InterfaceJuego {
         Enemigo enemigo2 = new Enemigo(2000, 490, 0, 0.5, 1.0, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
 
         fondos.add(fondoMario);
-        fondos.add(new Fondo(Herramientas.cargarImagen("juego/recursos/PAGE_gameover.jpg"),400,0,0));
+        fondos.add(gameOver);
 
         obstaculos.add(tuberia);
         obstaculos.add(tuberia1);
@@ -50,27 +52,30 @@ public class Juego extends InterfaceJuego {
         enemigos.add(enemigo1);
         enemigos.add(enemigo2);
 
+        this.gameOver = false;
+        this.gameOverSound = Herramientas.cargarSonido("juego/recursos/Super Princess Peach Music - Oh, No Peach Fell.wav");
+        //jugando.start();
+
         // Inicia el juego!
         this.entorno.iniciar();
     }
 
     public void tick() {
 
-        if(princesa.getVidas() > 0) {
-            TareasTick.fondo(entorno, fondos,princesa, nivel);
+        TareasTick.musica(gameOver, gameOverSound);
+        if (princesa.getVidas() > 0) {
+            TareasTick.fondo(entorno, fondos, princesa, nivel);
             TareasTick.dibujarBarraPrincesa(entorno, princesa);
             TareasTick.obstaculos(entorno, obstaculos);
             TareasTick.enemigos(entorno, enemigos);
             TareasTick.princesa(entorno, princesa);
             TareasTick.generarEnemigos(enemigos);
             TareasTick.colisiones(entorno, princesa, obstaculos, enemigos);
-            TareasTick.controladorPuntaje(entorno,princesa,enemigos);
+            TareasTick.controladorPuntaje(entorno, princesa, enemigos);
         } else {
-            TareasTick.gameOver(entorno,fondos);
+            TareasTick.gameOver(entorno, fondos);
+            gameOver = true;
         }
-
-
-
     }
 
     @SuppressWarnings("unused")

@@ -4,6 +4,8 @@ import entorno.Entorno;
 import entorno.Herramientas;
 import juego.entidades.*;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -14,10 +16,15 @@ public class TareasTick {
     /* Se que contabiliza puntaje. */
     protected static int puntos;
 
+
     protected static void controladorPuntaje(Entorno entorno, Princesa princesa, LinkedList<Enemigo> enemigos) {
-        if (colisionPoder(entorno, princesa, enemigos)) {
-            puntos += 5;
-        }
+       try {
+           if (colisionPoder(entorno, princesa, enemigos)) {
+               puntos += 5;
+           }
+       } catch (LineUnavailableException e) {
+           e.getMessage();
+       }
     }
 
     /* Dibuja vida y puntos en pantalla */
@@ -53,7 +60,7 @@ public class TareasTick {
     }
     /* Se verifica colisión : Poder/Enemigo */
 
-    protected static boolean colisionPoder(Entorno entorno, Princesa princesa, LinkedList<Enemigo> enemigos) {
+    protected static boolean colisionPoder(Entorno entorno, Princesa princesa, LinkedList<Enemigo> enemigos) throws LineUnavailableException {
         boolean colisiona = false;
         Poder poder = princesa.atacar();
 
@@ -64,6 +71,7 @@ public class TareasTick {
         if (enemigos.size() != 0 && poder != null) {
             for (int i = 0; i < enemigos.size(); i++) {
                 if (poder.colision(enemigos.get(i).getBordes())) {
+                    Herramientas.play("juego/recursos/goomba-kick.wav");
                     poder.setY(-10000000);
                     enemigos.remove(i);
                     colisiona = true;
@@ -94,7 +102,6 @@ public class TareasTick {
     }
 
     /* Dibuja a los obstáculos */
-
     protected static void obstaculos(Entorno entorno, LinkedList<Obstaculo> obstaculos) {
         for (Obstaculo obstaculo : obstaculos) {
             obstaculo.dibujarse(entorno);
@@ -113,6 +120,7 @@ public class TareasTick {
 
     /* Dibuja el pantalla GameOver */
     protected static void gameOver(Entorno entorno, LinkedList<Fondo> fondos) {
+
         double y = fondos.get(1).getY();
         if(fondos.get(1).getY() < 300) {
             fondos.get(1).setY(y + 1.5);
@@ -122,6 +130,13 @@ public class TareasTick {
         entorno.escribirTexto("Puntos : " + puntos + "", 20, 30);
 
     }
+
+    protected static void musica(boolean gameOver, Clip gameOverSound) {
+        if(gameOver) {
+            gameOverSound.start();
+        }
+    }
+
     /* Dibuja el fondo */
     protected static void fondo(Entorno entorno, LinkedList<Fondo> fondos,Princesa princesa, int nivel) {
         fondos.get(nivel).dibujar(entorno);
