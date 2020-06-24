@@ -32,6 +32,7 @@
       <w>golpeada</w>
       <w>grupo</w>
       <w>haga</w>
+      <w>infos</w>
       <w>inicia</w>
       <w>inicializa</w>
       <w>inicializar</w>
@@ -52,6 +53,7 @@
       <w>propios</w>
       <w>puntaje</w>
       <w>puntos</w>
+      <w>rectangulo</w>
       <w>recursos</w>
       <w>saltando</w>
       <w>saltar</w>
@@ -63,6 +65,7 @@
       <w>tuberia</w>
       <w>ultima</w>
       <w>velocidad</w>
+      <w>verificar</w>
       <w>vidas</w>
     </words>
   </dictionary>

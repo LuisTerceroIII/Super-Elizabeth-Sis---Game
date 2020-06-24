@@ -3,13 +3,14 @@ package juego.entidades;
 import entorno.Entorno;
 import entorno.Herramientas;
 
-
 import java.awt.*;
 
 public class Princesa {
 
     private double x;
     private double y;
+    private double angulo;
+    private double escala;
     private Image image;
     private Poder poder;
     private int vidas;
@@ -20,43 +21,45 @@ public class Princesa {
     private Rectangle bordes; // Rectangulo para verificar colisiones
 
 
-
     public Princesa() {
         this.x = 200;
         this.y = SUELO;
+        this.angulo = 0;
+        this.escala = 0.2;
         this.image = Herramientas.cargarImagen("juego/recursos/Peach.gif");
         this.vidas = 3;
         this.golpeada = false;
         this.saltando = false;
         this.bordes = new Rectangle((int) x, (int) y, 50, 60);
-        this.poder = new Poder(-10, -20);
+        this.poder = new Poder(-10, -20,0,0.1,5.9, Herramientas.cargarImagen("juego/recursos/fireball.gif"));
     }
 
     /*Se verifica todo lo que deba actualizarse en tick() : movimientos, ataque y vidas */
     public void dibujarse(Entorno entorno) {
-        entorno.dibujarImagen(image, x, y, 0, 0.2);
+        entorno.dibujarImagen(image, x, y, angulo, escala);
         bordes.setBounds((int) x, (int) y, 50, 60);
-        if (this.y == SUELO) {
-            if (entorno.sePresiono(entorno.TECLA_ARRIBA) && this.y == SUELO) {
+        if (getY() == SUELO) {
+            if (entorno.sePresiono(entorno.TECLA_ARRIBA) && getY() == SUELO) {
                 setSaltando(true);
                 Herramientas.play("juego/recursos/jump.wav");
 
             } else if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
-                if (this.getX() < 300) {
-                    this.setX(this.x + 2.5);
+                if (getX() < 300) {
+                    setX(getX() + 2.5);
                 }
-                entorno.dibujarImagen(image, x, y, 0, 0.2);
-                bordes.setBounds((int) this.getX(), (int) y, 50, 60);
+                entorno.dibujarImagen(image, x, y, angulo, escala);
+                bordes.setBounds((int) getX(), (int) getY(), 50, 60);
             } else if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
-                if (this.getX() > 50) {
-                    this.setX(this.x - 2.5);
+                if (getX() > 55) {
+                    setX(getX() - 2.5);
                 }
-                entorno.dibujarImagen(image, x, y, 0, 0.2);
+                entorno.dibujarImagen(image, x, y, angulo, escala);
                 bordes.setBounds((int) x, (int) y, 50, 60);
 
             } else if (entorno.sePresiono(entorno.TECLA_ESPACIO) && (this.poder.getX() > 850 || this.poder.getY() == -10000000)) {
-                entorno.dibujarImagen(image, x, y, 0, 0.2);
-                this.poder = new Poder(this.x + 50, this.y);
+                entorno.dibujarImagen(image, x, y, angulo, escala);
+                this.poder.setX(getX() + 50);
+                this.poder.setY(getY());
                 Herramientas.play("juego/recursos/fireball.wav");
 
             }
@@ -87,28 +90,29 @@ public class Princesa {
     }
     /* Metodo que se ejecuta cuando saltando = true*/
     public void saltar() {
-        if (this.y > 200) {
-            this.y = this.y - 5.5;
-            if (this.x < 300) {
-                this.x = this.x + 1.5;
+        if (getY() > 200) {
+           setY(getY() - 5.5);
+            //this.y = this.y - 5.5;
+            if (getX() < 300) {
+                setX(getX() + 1.5);
             }
         }
-        if (this.y <= 200) {
-            this.setSaltando(false);
+        if (getY() <= 200) {
+            setSaltando(false);
         }
 
     }
 
     /* Metodo que se ejecuta cuando saltando = false*/
     public void caer() {
-        if (this.y < SUELO) {
-            this.y = this.y + 5.5;
-            if (this.x < 300) {
-                this.x = this.x + 1.5;
+        if (getY() < SUELO) {
+            setY(getY() + 5.5);
+            if (getX() < 300) {
+                setX(getX() + 1.5);
             }
         }
-        if (this.y >= SUELO) {
-            this.y = SUELO;
+        if (this.getY() >= SUELO) {
+            setY(SUELO);
         }
 
     }
@@ -127,7 +131,7 @@ public class Princesa {
     public void setGolpeada(boolean golpeada) {
         this.golpeada = golpeada;
         if (golpeada) {
-            this.vidas -= 1;
+            setVidas(getVidas() - 1);
             Herramientas.play("juego/recursos/stomp_koopa_kid.wav");
         }
     }
@@ -149,7 +153,12 @@ public class Princesa {
     }
 
     public void setX(double x) {
-        this.x = x;
+        if(x >= 40 && x <= 310) {
+            this.x = x;
+        } else {
+            throw new RuntimeException("El valor de X debe estar entre 40 y 310");
+        }
+
     }
 
     public double getY() {
@@ -157,7 +166,11 @@ public class Princesa {
     }
 
     public void setY(double y) {
-        this.y = y;
+        if(y >= 190 && y <= 490) {
+            this.y = y;
+        } else {
+            throw new RuntimeException("El valor de Y debe estar entre 190 y 490");
+        }
     }
 
     public Image getImage() {
@@ -173,7 +186,12 @@ public class Princesa {
     }
 
     public void setVidas(int vidas) {
-        this.vidas = vidas;
+        if(vidas >= 0 && vidas < 4) {
+            this.vidas = vidas;
+        } else {
+            throw new RuntimeException("La cantidad de vidas permitas son 0 a 3");
+        }
+
     }
 
 
@@ -183,6 +201,21 @@ public class Princesa {
 
     public void setSaltando(boolean saltando) {
         this.saltando = saltando;
+    }
 
+    public double getAngulo() {
+        return angulo;
+    }
+
+    public void setAngulo(double angulo) {
+        this.angulo = angulo;
+    }
+
+    public double getEscala() {
+        return escala;
+    }
+
+    public void setEscala(double escala) {
+        this.escala = escala;
     }
 }

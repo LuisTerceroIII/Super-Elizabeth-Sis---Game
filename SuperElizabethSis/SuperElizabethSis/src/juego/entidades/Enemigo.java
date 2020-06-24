@@ -15,6 +15,7 @@ public class Enemigo {
 
 
     public Enemigo(double x, double y,double angulo, double escala, double velocidad, Image image) {
+
         this.x = x;
         this.y = y;
         this.angulo = angulo;

@@ -16,7 +16,6 @@ public class Juego extends InterfaceJuego {
     protected LinkedList<Obstaculo> obstaculos = new LinkedList<>();
     protected LinkedList<Enemigo> enemigos = new LinkedList<>();
     protected int nivel;
-    protected boolean gameOver;
     Clip gameOverSound;
 
     Juego() {
@@ -28,8 +27,8 @@ public class Juego extends InterfaceJuego {
 
         this.nivel = 0;
 
-        Fondo fondoMario = new Fondo(Herramientas.cargarImagen("juego/recursos/background.png"), 600, 300, 0.3);
-        Fondo gameOver = new Fondo(Herramientas.cargarImagen("juego/recursos/PAGE_gameover.jpg"), 400, 0, 0);
+        Fondo fondoMario = new Fondo(600, 300, 0.3, 0,Herramientas.cargarImagen("juego/recursos/background.png"));
+        Fondo gameOver = new Fondo(400, 0, 0, 0,Herramientas.cargarImagen("juego/recursos/PAGE_gameover.jpg"));
 
         princesa = new Princesa();
 
@@ -52,7 +51,7 @@ public class Juego extends InterfaceJuego {
         enemigos.add(enemigo1);
         enemigos.add(enemigo2);
 
-        this.gameOver = false;
+
         this.gameOverSound = Herramientas.cargarSonido("juego/recursos/Super Princess Peach Music - Oh, No Peach Fell.wav");
         //jugando.start();
 
@@ -62,9 +61,8 @@ public class Juego extends InterfaceJuego {
 
     public void tick() {
 
-        TareasTick.musica(gameOver, gameOverSound);
         if (princesa.getVidas() > 0) {
-            TareasTick.fondo(entorno, fondos, princesa, nivel);
+            TareasTick.fondo(entorno, fondos, nivel);
             TareasTick.dibujarBarraPrincesa(entorno, princesa);
             TareasTick.obstaculos(entorno, obstaculos);
             TareasTick.enemigos(entorno, enemigos);
@@ -73,8 +71,8 @@ public class Juego extends InterfaceJuego {
             TareasTick.colisiones(entorno, princesa, obstaculos, enemigos);
             TareasTick.controladorPuntaje(entorno, princesa, enemigos);
         } else {
-            TareasTick.gameOver(entorno, fondos);
-            gameOver = true;
+            TareasTick.gameOver(entorno, fondos, gameOverSound);
+
         }
     }
 

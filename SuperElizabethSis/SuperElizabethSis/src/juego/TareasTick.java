@@ -119,7 +119,7 @@ public class TareasTick {
     }
 
     /* Dibuja el pantalla GameOver */
-    protected static void gameOver(Entorno entorno, LinkedList<Fondo> fondos) {
+    protected static void gameOver(Entorno entorno, LinkedList<Fondo> fondos,Clip gameOverSound) {
 
         double y = fondos.get(1).getY();
         if(fondos.get(1).getY() < 300) {
@@ -129,16 +129,13 @@ public class TareasTick {
         entorno.cambiarFont("Arial", 30, Color.WHITE);
         entorno.escribirTexto("Puntos : " + puntos + "", 20, 30);
 
+        gameOverSound.start();
+
     }
 
-    protected static void musica(boolean gameOver, Clip gameOverSound) {
-        if(gameOver) {
-            gameOverSound.start();
-        }
-    }
 
     /* Dibuja el fondo */
-    protected static void fondo(Entorno entorno, LinkedList<Fondo> fondos,Princesa princesa, int nivel) {
+    protected static void fondo(Entorno entorno, LinkedList<Fondo> fondos, int nivel) {
         fondos.get(nivel).dibujar(entorno);
     }
 }
