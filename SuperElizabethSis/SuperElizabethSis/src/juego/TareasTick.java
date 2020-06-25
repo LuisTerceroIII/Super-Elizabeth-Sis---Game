@@ -64,15 +64,15 @@ public class TareasTick {
         boolean colisiona = false;
         Poder poder = princesa.atacar();
 
-        if (poder != null) {
+        if (poder.getY() == 490) {
             poder.dibujar(entorno);
             poder.avanzar();
         }
-        if (enemigos.size() != 0 && poder != null) {
+        if (enemigos.size() != 0) {
             for (int i = 0; i < enemigos.size(); i++) {
                 if (poder.colision(enemigos.get(i).getBordes())) {
                     Herramientas.play("juego/recursos/goomba-kick.wav");
-                    poder.setY(-10000000);
+                    poder.setY(-20);
                     enemigos.remove(i);
                     colisiona = true;
                 }

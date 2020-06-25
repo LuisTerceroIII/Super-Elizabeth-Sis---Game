@@ -26,9 +26,10 @@ public class Poder {
         entorno.dibujarImagen(image,x,y,angulo,escala);
     }
 
+    //Metodo que hace avanzar a poder.
     public void avanzar(){
         if(getX() > 850) {
-            setY(-10000000);
+            setY(-20);
         }
         setX(getX() + velocidad);
     }
@@ -49,7 +50,12 @@ public class Poder {
     }
 
     public void setX(double x) {
-        this.x = x;
+        if(x > 0 && x < 900) {
+            this.x = x;
+        } else {
+            throw new RuntimeException("La posicion de x de Poder debe ser entre 0 y 900");
+        }
+
     }
 
     public double getY() {
@@ -57,7 +63,11 @@ public class Poder {
     }
 
     public void setY(double y) {
-        this.y = y;
+        if(y > -25 && y < 700) {
+            this.y = y;
+        } else {
+            throw new RuntimeException("La posicion en Y debe ser entre -25 y 700");
+        }
     }
 
     public double getAngulo() {

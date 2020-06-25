@@ -31,9 +31,9 @@ public class Enemigo {
 
     /* Movimiento hacia izquierda */
     public void moverIzq() {
-        this.x = this.x - velocidad;
-        if(this.x < -100 ){
-            this.x = Math.floor(Math.random()*(1500-1300+1)+1500);
+        setX(getX() - velocidad);
+        if(getX() < -100 ){
+            setX(Math.floor(Math.random()*(1500-1300+1)+1500));
         }
     }
     /* Se obtiene el rectángulo de colisión de la instancia */
@@ -46,7 +46,12 @@ public class Enemigo {
     }
 
     public void setX(double x) {
-        this.x = x;
+        if(x > -150 && x < 5000) {
+            this.x = x;
+        } else {
+            throw new RuntimeException("Enemigo no debe tener un posicion en X menor a -150 o mayor a 5000");
+        }
+
     }
 
     public double getY() {
@@ -54,7 +59,11 @@ public class Enemigo {
     }
 
     public void setY(double y) {
-        this.y = y;
+        if(y > -100 && y < 700){
+            this.y = y;
+        } else {
+            throw new RuntimeException("Enemigo no debe tener un posicion en Y menor a -20 o mayor a 700");
+        }
     }
 
     public double getEscala() {

@@ -28,9 +28,9 @@ public class Obstaculo {
     }
     /* Movimiento hacia izquierda */
     public void moverIzq() {
-        this.x = this.x - velocidad;
-        if(this.x < -40 ){
-            this.x = 1000 ;
+        setX(getX()-velocidad);
+        if(getX() < -40 ){
+            setX(1000);
         }
     }
 
@@ -45,7 +45,12 @@ public class Obstaculo {
     }
 
     public void setX(double x) {
-        this.x = x;
+        if(x > -50 && x < 5000) {
+            this.x = x;
+        } else {
+            throw new RuntimeException("Obstaculo no debe tener un posicion en X menor a -50 o mayor a 5000");
+        }
+
     }
 
     public double getY() {
@@ -53,7 +58,12 @@ public class Obstaculo {
     }
 
     public void setY(double y) {
-        this.y = y;
+        if(y > -20 && y < 700){
+            this.y = y;
+        } else {
+            throw new RuntimeException("Obstaculo no debe tener un posicion en Y menor a -20 o mayor a 700");
+        }
+
     }
 
     public Image getImage() {

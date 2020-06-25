@@ -24,7 +24,6 @@ public class Fondo {
     public void dibujar(Entorno entorno) {
         entorno.dibujarImagen(image,x,y,angulo);
     }
-
     public double getX() {
         return x;
     }

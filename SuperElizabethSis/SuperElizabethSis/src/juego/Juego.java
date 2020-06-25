@@ -30,7 +30,8 @@ public class Juego extends InterfaceJuego {
         Fondo fondoMario = new Fondo(600, 300, 0.3, 0,Herramientas.cargarImagen("juego/recursos/background.png"));
         Fondo gameOver = new Fondo(400, 0, 0, 0,Herramientas.cargarImagen("juego/recursos/PAGE_gameover.jpg"));
 
-        princesa = new Princesa();
+
+        princesa =  new Princesa(200,490,0,0.2, Herramientas.cargarImagen("juego/recursos/Peach.gif"));
 
         Obstaculo tuberia = new Obstaculo(1000, 500, 0, 0.2, 0.9, Herramientas.cargarImagen("juego/recursos/green-pipe.png"));
         Obstaculo tuberia1 = new Obstaculo(1350, 500, 0, 0.2, 0.9, Herramientas.cargarImagen("juego/recursos/green-pipe.png"));
@@ -53,7 +54,6 @@ public class Juego extends InterfaceJuego {
 
 
         this.gameOverSound = Herramientas.cargarSonido("juego/recursos/Super Princess Peach Music - Oh, No Peach Fell.wav");
-        //jugando.start();
 
         // Inicia el juego!
         this.entorno.iniciar();

@@ -21,17 +21,19 @@ public class Princesa {
     private Rectangle bordes; // Rectangulo para verificar colisiones
 
 
-    public Princesa() {
-        this.x = 200;
-        this.y = SUELO;
-        this.angulo = 0;
-        this.escala = 0.2;
-        this.image = Herramientas.cargarImagen("juego/recursos/Peach.gif");
-        this.vidas = 3;
-        this.golpeada = false;
-        this.saltando = false;
-        this.bordes = new Rectangle((int) x, (int) y, 50, 60);
+
+    public Princesa(double x, double y, double angulo, double escala, Image image) {
+        setX(x);
+        setY(y);
+        setAngulo(angulo);
+        setEscala(escala);
+        setImage(image);
         this.poder = new Poder(-10, -20,0,0.1,5.9, Herramientas.cargarImagen("juego/recursos/fireball.gif"));
+        setVidas(3);
+        setGolpeada(false);
+        setTiempoDelGolpe(tiempoDelGolpe);
+        setSaltando(false);
+        this.bordes = new Rectangle((int) x, (int) y, 50, 60);
     }
 
     /*Se verifica todo lo que deba actualizarse en tick() : movimientos, ataque y vidas */
@@ -56,7 +58,7 @@ public class Princesa {
                 entorno.dibujarImagen(image, x, y, angulo, escala);
                 bordes.setBounds((int) x, (int) y, 50, 60);
 
-            } else if (entorno.sePresiono(entorno.TECLA_ESPACIO) && (this.poder.getX() > 850 || this.poder.getY() == -10000000)) {
+            } else if (entorno.sePresiono(entorno.TECLA_ESPACIO) && (this.poder.getX() > 850 || this.poder.getY() == -20)) {
                 entorno.dibujarImagen(image, x, y, angulo, escala);
                 this.poder.setX(getX() + 50);
                 this.poder.setY(getY());
@@ -92,7 +94,6 @@ public class Princesa {
     public void saltar() {
         if (getY() > 200) {
            setY(getY() - 5.5);
-            //this.y = this.y - 5.5;
             if (getX() < 300) {
                 setX(getX() + 1.5);
             }
