@@ -16,7 +16,7 @@ public class Juego extends InterfaceJuego {
     protected LinkedList<Obstaculo> obstaculos = new LinkedList<>();
     protected LinkedList<Enemigo> enemigos = new LinkedList<>();
     protected int nivel;
-    Clip gameOverSound;
+    private final Clip gameOver;
 
     Juego() {
         // Inicializa el objeto entorno
@@ -30,16 +30,15 @@ public class Juego extends InterfaceJuego {
         Fondo fondoMario = new Fondo(600, 300, 0.3, 0,Herramientas.cargarImagen("juego/recursos/background.png"));
         Fondo gameOver = new Fondo(400, 0, 0, 0,Herramientas.cargarImagen("juego/recursos/PAGE_gameover.jpg"));
 
-
         princesa =  new Princesa(200,490,0,0.2, Herramientas.cargarImagen("juego/recursos/Peach.gif"));
 
         Obstaculo tuberia = new Obstaculo(1000, 500, 0, 0.2, 0.9, Herramientas.cargarImagen("juego/recursos/green-pipe.png"));
         Obstaculo tuberia1 = new Obstaculo(1350, 500, 0, 0.2, 0.9, Herramientas.cargarImagen("juego/recursos/green-pipe.png"));
         Obstaculo tuberia2 = new Obstaculo(1700, 500, 0, 0.2, 0.9, Herramientas.cargarImagen("juego/recursos/green-pipe.png"));
 
-        Enemigo enemigo = new Enemigo(1200, 490, 0, 0.5, 1.0, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
-        Enemigo enemigo1 = new Enemigo(1600, 490, 0, 0.5, 1.0, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
-        Enemigo enemigo2 = new Enemigo(2000, 490, 0, 0.5, 1.0, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
+        Enemigo enemigo = new Enemigo(1200, 490, 0, 0.5, 2.0, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
+        Enemigo enemigo1 = new Enemigo(1600, 490, 0, 0.5, 2.0, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
+        Enemigo enemigo2 = new Enemigo(2000, 490, 0, 0.5, 2.0, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
 
         fondos.add(fondoMario);
         fondos.add(gameOver);
@@ -52,8 +51,7 @@ public class Juego extends InterfaceJuego {
         enemigos.add(enemigo1);
         enemigos.add(enemigo2);
 
-
-        this.gameOverSound = Herramientas.cargarSonido("juego/recursos/Super Princess Peach Music - Oh, No Peach Fell.wav");
+        this.gameOver = Herramientas.cargarSonido("juego/recursos/Super Princess Peach Music - Oh, No Peach Fell.wav");
 
         // Inicia el juego!
         this.entorno.iniciar();
@@ -71,8 +69,7 @@ public class Juego extends InterfaceJuego {
             TareasTick.colisiones(entorno, princesa, obstaculos, enemigos);
             TareasTick.controladorPuntaje(entorno, princesa, enemigos);
         } else {
-            TareasTick.gameOver(entorno, fondos, gameOverSound);
-
+            TareasTick.gameOver(entorno, fondos, gameOver);
         }
     }
 

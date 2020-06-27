@@ -84,11 +84,12 @@ public class TareasTick {
     /* Genera entre 3 y 5 Enemigos */
 
     protected static void generarEnemigos(LinkedList<Enemigo> enemigos) {
+
         if (enemigos.size() <= 0) {
             int cantidadDeEnemigos = (int) Math.floor(Math.random() * (5 - 3 + 1) + 3);
             int x = 1000;
             for (int i = 0; i < cantidadDeEnemigos; i++) {
-                Enemigo soldado = new Enemigo(x, 490, 0, 0.5, 1.0, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
+                Enemigo soldado = new Enemigo(x, 490, 0, 0.5, 2.5, Herramientas.cargarImagen("juego/recursos/enemy.gif"));
                 x = x + (int) Math.floor(Math.random() * (400 - 200 + 1) + 200);
                 enemigos.add(soldado);
             }

@@ -8,21 +8,18 @@ public class Enemigo {
 
     private double x;
     private double y;
-    private final double angulo;
+    private double angulo;
     private double escala;
-    private final double velocidad;
+    private double velocidad;
     private Image image;
 
-
     public Enemigo(double x, double y,double angulo, double escala, double velocidad, Image image) {
-
-        this.x = x;
-        this.y = y;
-        this.angulo = angulo;
-        this.escala = escala;
-        this.velocidad = velocidad;
-        this.image = image;
-
+        setX(x);
+        setY(y);
+        setAngulo(angulo);
+        setEscala(escala);
+        setVelocidad(velocidad);
+        setImage(image);
     }
 
     public void dibujarse(Entorno entorno) {
@@ -38,7 +35,7 @@ public class Enemigo {
     }
     /* Se obtiene el rectángulo de colisión de la instancia */
     public Rectangle getBordes() {
-        return new Rectangle((int)x,(int)y,110,90);
+        return new Rectangle((int)x - 55,(int)y - 45,110,90);
     }
 
     public double getX() {
@@ -80,5 +77,20 @@ public class Enemigo {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public void setAngulo(double angulo) {
+        this.angulo = angulo;
+    }
+    public double getAngulo() {
+        return angulo;
+    }
+
+    public void setVelocidad(double velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    public double getVelocidad() {
+        return velocidad;
     }
 }

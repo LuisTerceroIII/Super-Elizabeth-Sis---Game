@@ -14,11 +14,11 @@ public class Fondo {
 
 
     public Fondo(double x, double y, double escala, double angulo, Image image) {
-        this.x = x;
-        this.y = y;
-        this.escala = escala;
-        this.angulo = angulo;
-        this.image = image;
+        setX(x);
+        setY(y);
+        setAngulo(angulo);
+        setEscala(escala);
+        setImage(image);
     }
 
     public void dibujar(Entorno entorno) {

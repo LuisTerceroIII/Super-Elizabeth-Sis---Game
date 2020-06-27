@@ -10,16 +10,16 @@ public class Poder {
     private double y;
     private double angulo;
     private double escala;
-    private final double velocidad;
-    private final Image image;
+    private  double velocidad;
+    private  Image image;
 
     public Poder(double x, double y, double angulo, double escala, double velocidad, Image image) {
-        this.x = x;
-        this.y = y;
-        this.angulo = angulo;
-        this.escala = escala;
-        this.velocidad = velocidad;
-        this.image = image;
+        setX(x);
+        setY(y);
+        setAngulo(angulo);
+        setEscala(escala);
+        setVelocidad(velocidad);
+        setImage(image);
     }
 
     public void dibujar(Entorno entorno) {
@@ -41,7 +41,7 @@ public class Poder {
 
     /* Se obtiene el rectángulo de colisión de la instancia */
     public Rectangle getBordes() {
-        return new Rectangle((int)x,(int)y,10,20);
+        return new Rectangle((int)x - 5,(int)y - 10,10,20);
     }
 
 
@@ -50,7 +50,7 @@ public class Poder {
     }
 
     public void setX(double x) {
-        if(x > 0 && x < 900) {
+        if(x > -30 && x < 900) {
             this.x = x;
         } else {
             throw new RuntimeException("La posicion de x de Poder debe ser entre 0 y 900");
@@ -86,4 +86,19 @@ public class Poder {
         this.escala = escala;
     }
 
+    public double getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(double velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
 }

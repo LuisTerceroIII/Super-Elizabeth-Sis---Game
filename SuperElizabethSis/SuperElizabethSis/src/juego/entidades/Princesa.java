@@ -31,42 +31,34 @@ public class Princesa {
         this.poder = new Poder(-10, -20,0,0.1,5.9, Herramientas.cargarImagen("juego/recursos/fireball.gif"));
         setVidas(3);
         setGolpeada(false);
-        setTiempoDelGolpe(tiempoDelGolpe);
+        setTiempoDelGolpe(0);
         setSaltando(false);
-        this.bordes = new Rectangle((int) x, (int) y, 50, 60);
+        this.bordes = new Rectangle((int) x - 25, (int) y - 30, 50, 60);
     }
 
     /*Se verifica todo lo que deba actualizarse en tick() : movimientos, ataque y vidas */
     public void dibujarse(Entorno entorno) {
-        entorno.dibujarImagen(image, x, y, angulo, escala);
-        bordes.setBounds((int) x, (int) y, 50, 60);
         if (getY() == SUELO) {
             if (entorno.sePresiono(entorno.TECLA_ARRIBA) && getY() == SUELO) {
                 setSaltando(true);
                 Herramientas.play("juego/recursos/jump.wav");
-
             } else if (entorno.estaPresionada(entorno.TECLA_DERECHA)) {
                 if (getX() < 300) {
                     setX(getX() + 2.5);
                 }
-                entorno.dibujarImagen(image, x, y, angulo, escala);
-                bordes.setBounds((int) getX(), (int) getY(), 50, 60);
             } else if (entorno.estaPresionada(entorno.TECLA_IZQUIERDA)) {
                 if (getX() > 55) {
                     setX(getX() - 2.5);
                 }
-                entorno.dibujarImagen(image, x, y, angulo, escala);
-                bordes.setBounds((int) x, (int) y, 50, 60);
-
             } else if (entorno.sePresiono(entorno.TECLA_ESPACIO) && (this.poder.getX() > 850 || this.poder.getY() == -20)) {
-                entorno.dibujarImagen(image, x, y, angulo, escala);
                 this.poder.setX(getX() + 50);
                 this.poder.setY(getY());
                 Herramientas.play("juego/recursos/fireball.wav");
-
             }
         }
-        this.controladorVidas();
+        entorno.dibujarImagen(image, x, y, angulo, escala);
+        bordes.setBounds((int) x - 25, (int) y - 30, 50, 60);
+        controladorVidas();
         controladorSalto();
     }
 

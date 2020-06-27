@@ -13,12 +13,12 @@ public class Obstaculo {
     private double velocidad;
 
     public Obstaculo(double x,double y,double angulo, double escala,double velocidad, Image image) {
-        this.x = x;
-        this.y = y;
-        this.angulo = angulo;
-        this.escala = escala;
-        this.velocidad = velocidad;
-        this.image = image;
+        setX(x);
+        setY(y);
+        setAngulo(angulo);
+        setEscala(escala);
+        setVelocidad(velocidad);
+        setImage(image);
     }
 
 
@@ -29,16 +29,15 @@ public class Obstaculo {
     /* Movimiento hacia izquierda */
     public void moverIzq() {
         setX(getX()-velocidad);
-        if(getX() < -40 ){
+        if(getX() < - 40 ){
             setX(1000);
         }
     }
 
     /* Se obtiene el rectángulo de colisión de la instancia */
     public Rectangle getBordes() {
-        return new Rectangle((int)x,(int)y,60,80);
+        return new Rectangle((int)x - 30,(int)y - 40,60,80);
     }
-
 
     public double getX() {
         return x;
@@ -64,6 +63,30 @@ public class Obstaculo {
             throw new RuntimeException("Obstaculo no debe tener un posicion en Y menor a -20 o mayor a 700");
         }
 
+    }
+
+    public double getAngulo() {
+        return angulo;
+    }
+
+    public void setAngulo(double angulo) {
+        this.angulo = angulo;
+    }
+
+    public double getEscala() {
+        return escala;
+    }
+
+    public void setEscala(double escala) {
+        this.escala = escala;
+    }
+
+    public double getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(double velocidad) {
+        this.velocidad = velocidad;
     }
 
     public Image getImage() {
